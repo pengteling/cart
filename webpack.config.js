@@ -3,15 +3,16 @@ const path = require('path')
 const VueLoaderPlugin = require('vue-loader/lib/plugin')
 const HtmlWebpackPlugin = require('html-webpack-plugin')
 const MiniCssExtractPlugin = require('mini-css-extract-plugin')
+
 module.exports = (env, args) => {
     const isDev = args.mode === 'development'
-    
+
     const config = {
         mode: 'development',
         entry: './src/main.js',
         output: {
             path: path.resolve(__dirname, './dist'),
-            filename: '[name]-[hash:8].js'
+            filename: isDev? '[name]-[hash:8].js' : "[name]-[contenthash:8].js"
         },
         module: {
             rules: [{
@@ -25,13 +26,21 @@ module.exports = (env, args) => {
                 exclude: /node_modules/
             }, {
                 test: /\.scss/,
-                use: [isDev ? 'vue-style-loader': MiniCssExtractPlugin.loader,
-                    'css-loader', 'postcss-loader',{
-                        loader:'sass-loader',
-                        // options:{
-                        //     data:"$color:red;"
-                        // }
-                    }]
+                use: [isDev ? 'vue-style-loader' : MiniCssExtractPlugin.loader,
+                    'css-loader', 'postcss-loader', {
+                    loader: 'sass-loader',
+                    // options:{
+                    //     data:"$color:red;"
+                    // }
+                }]
+            },{
+                test:/\.(png|jpg|jpeg|gif|webp)$/,
+                use:{
+                    loader:'url-loader',
+                    options:{
+                        limit:5*1024
+                    }
+                }
             }]
         },
         resolve: {
@@ -40,16 +49,12 @@ module.exports = (env, args) => {
         plugins: [
             // vue-loader 必须项
             new VueLoaderPlugin(),
-            // 热加载插件
-            // new webpack.HotModuleReplacementPlugin(),
+            
             // html 模板
             new HtmlWebpackPlugin({
                 template: './src/index.html'
             }),
 
-            // new webpack.DefinePlugin({
-            //     '$color':'red'
-            // })
 
         ],
         // devtool: 'eval-source-map',
@@ -59,13 +64,28 @@ module.exports = (env, args) => {
         //     hot: true,
         //     inline: true
         // }
+        optimization:{
+
+            // js代码分离
+            splitChunks:{
+                chunks:'all'
+            },
+            runtimeChunk:true
+        }
 
     }
 
-    if(isDev){
+    if (isDev) {
         config.plugins.push(
             new webpack.HotModuleReplacementPlugin()
-        )
+        ),
+
+        config.devtool = "cheap-source-map",
+        config.devServer = {
+            port:8080,
+            hot:true,
+            inline:true
+        }
     }
 
     return config
