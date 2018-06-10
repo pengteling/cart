@@ -1,10 +1,10 @@
 <template>
   <div id="app" @touchend="hideNav">
-    <cart-head >
 
-    </cart-head>
+    <cart-head></cart-head>
     <cart-main></cart-main>
     <cart-footer></cart-footer>
+
   </div>
 </template>
 <script>

@@ -25,7 +25,7 @@
         </div>
         <div class="type-control">
           <button @touchend="selectedCountControl(good,'-')">-</button>
-          <p>{{ good.selectedCount }}</p>
+          <input type="number" v-count="good">
           <button @touchend="selectedCountControl(good,'+')">+</button>
         </div>
         
@@ -100,7 +100,7 @@ export default {
       }
     },
     checkStyle(check){
-      console.log(check)
+      
       if(check){
         return{
           backgroundImage:`url(${this.checkboxBg.true})`
@@ -116,6 +116,33 @@ export default {
     // 重要接口
     // 通过事件总线发送选择的商品信息
     window.eventBus.$emit('sendChecked',this.checkList)
+  },
+  directives:{
+    count:{
+      bind(el,binding){
+        
+        el.value = binding.value.selectedCount
+
+        el.addEventListener('change',(e)=>{
+          let max = binding.value.type[binding.value.selectedIndex].stock
+          if(e.target.value <= 1){
+            // e.target.value = 1
+            binding.value.selectedCount = 1
+          }else if(e.target.value >= max){
+            // e.target.value = max
+            binding.value.selectedCount = max
+          }else{
+            binding.value.selectedCount = Math.round(e.target.value)
+          }
+        })
+      },
+      update(el,binding){
+        el.value = binding.value.selectedCount
+      }
+    }
+  },
+  watch:{
+    
   }
 
 };
@@ -167,8 +194,13 @@ main {
             height: 30px;
             background: #ccc;
           }
-          p{
-            padding:0 10px;
+          input{
+            appearance: none;
+            // padding:0 10px;
+            // display: inline;
+            width: 25px;
+            padding: 0 10px;
+            text-align: center;
           }
         }
       }
