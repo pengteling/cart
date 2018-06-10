@@ -1,6 +1,7 @@
 <template>
   <header>
-    <div class="back"></div>
+    <div class="back"
+    @touchend="back"></div>
     <div class="title">购物车</div>
     <span @touchend.prevent.stop="toggleMenu">
       <i></i>
@@ -62,6 +63,9 @@ export default {
     },
     hideNav(){
       this.showNav = false
+    },
+    back(){
+      history.back(-1)
     }
   },
   mounted(){
@@ -83,17 +87,17 @@ $base:100;
     padding: 0 10px;
     box-shadow: 0 0 5px rgba(20, 20, 20, 0.5);
     .back{
-      height: 25 / $base + rem;
-      width: 25 / $base + rem;
-      background: url('./img/back.png') no-repeat center / 100% 100%;
+      height: 50 / $base + rem;
+      width: 50 / $base + rem;
+      background: url('./img/back.png') no-repeat center / 70% 70%;
     }
     .title{
       text-align: center;
       font-size: 23 / $base + rem;
     }
     &>span{
-      height: 25 / $base + rem;
-      width: 25 / $base + rem;
+      height: 50 / $base + rem;
+      width: 30 / $base + rem;
       display: flex;
       justify-content: space-between;
       align-items: center;
