@@ -63,7 +63,20 @@ export default {
   methods:{
     doBuy(){
       if(this.count){
-        alert('购买成功')
+        let bill = []
+        this.list.forEach((item)=>{
+          bill.push({
+            id:item.id,
+            name:item.title,
+            type:{
+              id:item.type[item.selectedIndex].id,
+              desc:item.type[item.selectedIndex].desc
+            },
+            count:item.selectedCount
+          })
+        })
+
+        alert('购买成功'+JSON.stringify(bill,null,4))
       }
     }
   }

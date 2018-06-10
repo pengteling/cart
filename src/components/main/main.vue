@@ -46,46 +46,7 @@ export default {
         false: require("./img/uncheck.png"),
         true: require("./img/checked.png")
       },
-      goods:[
-        {
-          id: 1,
-          title: "铅笔",
-          selectedIndex:0,
-          selectedCount:1,
-          buy:false,
-          type: [
-            {
-              id: 1,
-              stock:1000,
-              desc: "2B铅笔",
-              value: "0.50"
-            },
-            {
-              id:2,
-              stock:1500,
-              desc:"HB铅笔",
-              value:'0.60'
-            }
-          ]
-        },{
-          id:2,
-          title:"文具盒",
-          selectedIndex:0,
-          selectedCount:1,
-          buy:false,
-          type:[{
-            id:1,
-            stock:200,
-            desc:"小学生文具盒",
-            value:"5.00"
-          },{
-            id:2,
-            stock:300,
-            desc:'基本款',
-            value:"5.50"
-          }]
-        }
-      ],
+      goods:require('../../data/data.json')
     }
   },
   computed:{

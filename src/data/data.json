@@ -1,0 +1,73 @@
+[
+  {
+    "id": 1,
+    "title": "铅笔",
+    "selectedIndex": 0,
+    "selectedCount": 1,
+    "buy": false,
+    "type": [
+      {
+        "id": 1,
+        "stock": 1000,
+        "desc": "2B铅笔",
+        "value": "0.50"
+      },
+      {
+        "id": 2,
+        "stock": 1500,
+        "desc": "HB铅笔",
+        "value":"0.60"
+      }
+    ]
+  },
+  {
+    "id": 2,
+    "title": "文具盒",
+    "selectedIndex": 0,
+    "selectedCount": 1,
+    "buy": false,
+    "type": [
+      {
+      "id": 1,
+      "stock": 200,
+      "desc": "小学生文具盒",
+      "value": "5.00"
+      },
+      {
+      "id": 2,
+      "stock": 300,
+      "desc":"基本款",
+      "value": "5.50"
+      }
+    ]
+  },{
+    "id": 3,
+    "title": "联想(Lenovo)小新潮7000",
+    "selectedIndex": 0,
+    "selectedCount": 1,
+    "buy": false,
+    "type": [
+      {
+      "id": 1,
+      "stock": 200,
+      "desc": "13.3英寸 i7 256G",
+      "value": "5699.00"
+      },{
+      "id": 2,
+      "stock": 300,
+      "desc":"13.3英寸 i5 256G",
+      "value": "4998.00"
+      },{
+      "id": 3,
+      "stock": 100,
+      "desc":"14英寸 i7 2T+128G",
+      "value": "6199.00"
+      },{
+      "id": 4,
+      "stock": 300,
+      "desc":"14英寸 i5 2T+128G",
+      "value": "5499.00"
+      }
+    ]
+  }
+]
