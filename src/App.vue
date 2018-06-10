@@ -10,10 +10,12 @@
 <script>
 import head from './components/head/head'
 import main from './components/main/main'
+import foot from './components/foot/foot'
 export default {
   components:{
     'cart-head':head,
-    'cart-main':main
+    'cart-main':main,
+    'cart-footer':foot
   },
   methods:{
     hideNav(){

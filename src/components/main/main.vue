@@ -6,7 +6,7 @@
         全选
       </div>
     </header>
-    <ul class="list">
+    <ul class="list" v-if="goods.length > 0">
       <li v-for="good in goods"
       :key="good.id">
       <div>
@@ -14,7 +14,7 @@
       </div>
       <div>
         <h3>{{good.title}}</h3>
-        <select v-model.number="good.selected">
+        <select v-model.number="good.selectedIndex">
           <option v-for="(p,index) in good.type"
             :key="p.id" :value="index">{{p.desc}}</option>
         </select>
@@ -32,6 +32,9 @@
       </div>
       </li>
     </ul>
+    <div v-else>
+      购物车空空如也
+    </div>
     
   </main>
 </template>
@@ -43,11 +46,11 @@ export default {
         false: require("./img/uncheck.png"),
         true: require("./img/checked.png")
       },
-      goods: [
+      goods:[
         {
           id: 1,
           title: "铅笔",
-          selected:0,
+          selectedIndex:0,
           selectedCount:1,
           buy:false,
           type: [
@@ -67,7 +70,7 @@ export default {
         },{
           id:2,
           title:"文具盒",
-          selected:0,
+          selectedIndex:0,
           selectedCount:1,
           buy:false,
           type:[{
@@ -83,7 +86,6 @@ export default {
           }]
         }
       ],
-      
     }
   },
   computed:{
@@ -116,10 +118,9 @@ export default {
       })
     }
   },
-
   methods:{
     typeMoney(good){
-      return (good.type[good.selected].value * good.selectedCount).toFixed(2)
+      return (good.type[good.selectedIndex].value * good.selectedCount).toFixed(2)
     },
     selectedCountControl(good,operator){
       if(operator === '-'){
@@ -130,7 +131,7 @@ export default {
         }
 
       }else{
-        if(good.selectedCount >= good.type[good.selected].stock){
+        if(good.selectedCount >= good.type[good.selectedIndex].stock){
           return
         }else{
           good.selectedCount++
@@ -161,8 +162,10 @@ export default {
 <style lang="scss" scoped>
 $base: 100;
 main {
+  flex: 1;
   display: flex;
   flex-direction: column;
+  overflow: auto;
   input[type="checkbox"]{
       appearance: none;
       width: 30px;
