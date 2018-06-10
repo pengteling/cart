@@ -76,7 +76,7 @@ export default {
           })
         })
 
-        alert('购买成功'+JSON.stringify(bill,null,4))
+        alert('购买成功'+JSON.stringify(bill,null,4)+'共计：'+this.totalMoney+"元")
       }
     }
   }

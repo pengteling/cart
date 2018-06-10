@@ -27,7 +27,14 @@ module.exports = (env, args) => {
             }, {
                 test: /\.scss/,
                 use: [isDev ? 'vue-style-loader' : MiniCssExtractPlugin.loader,
-                    'css-loader', 'postcss-loader', {
+                    {
+                        loader:'css-loader',
+                        options:{
+                            minimize:true
+                        }
+                    }, 
+                    'postcss-loader',
+                    {
                     loader: 'sass-loader',
                     // options:{
                     //     data:"$color:red;"
@@ -86,6 +93,12 @@ module.exports = (env, args) => {
             hot:true,
             inline:true
         }
+    }else{
+        config.plugins.push(
+            new MiniCssExtractPlugin({
+                filename:'[name]-[chunkhash:8].css'
+            })
+        )
     }
 
     return config
