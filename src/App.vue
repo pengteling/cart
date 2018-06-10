@@ -9,10 +9,11 @@
 </template>
 <script>
 import head from './components/head/head'
-
+import main from './components/main/main'
 export default {
   components:{
-    'cart-head':head
+    'cart-head':head,
+    'cart-main':main
   },
   methods:{
     hideNav(){
