@@ -2,7 +2,7 @@
 ## 仿JD购物车
 ### 用法
 ```
-git clone 
+git clone https://github.com/Eschere/cart.git
 cd cart
 npm i
 npm run dev
